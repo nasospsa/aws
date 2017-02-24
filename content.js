@@ -1,26 +1,46 @@
 // module.exports = "It works from content.js.";
 
-const {OperationHelper} = require('apac');
+var aws = require('aws-lib');
 
-const opHelper = new OperationHelper({
+var config = {
     awsId:     'AKIAJUMBIFVUUZ5DJU3A',
     awsSecret: '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',
     assocId:   'PRODUCMEN-21',
     locale:    'UK'
+};
+
+// var {OperationHelper} = require('apac');
+// var opHelper = new OperationHelper(config);
+
+// console.log(opHelper);
+// opHelper.scheme = 'https';
+
+// opHelper.execute('ItemSearch', {
+//   'SearchIndex': 'Books',
+//   'Keywords': 'harry potter',
+//   'ResponseGroup': 'ItemAttributes,Offers'
+// }).then((response) => {
+//     console.log("Results object: ", response.result);
+//     console.log("Raw response body: ", response.responseBody);
+// });
+
+console.log(config.awsId, config.awsSecret, config.assocId);
+var client = aws.createProdAdvClient(config.awsId, config.awsSecret, config.assocId, {
+  host: 'webservices.amazon.co.uk',
+  secure: null
 });
 
-console.log(opHelper);
-opHelper.scheme = 'https';
+console.log(client);
 
-opHelper.execute('ItemSearch', {
+client.call('ItemSearch', {
   'SearchIndex': 'Books',
   'Keywords': 'harry potter',
   'ResponseGroup': 'ItemAttributes,Offers'
-}).then((response) => {
-    console.log("Results object: ", response.result);
-    console.log("Raw response body: ", response.responseBody);
+}, function(err, result) {
+  console.log(err, result);
+  // console.log("Results object: ", response.result);
+  // console.log("Raw response body: ", response.responseBody);
 });
-
 
 // var AmazonAPI = require('amz-products');
 

@@ -1,0 +1,10 @@
+Total Results: <%= items.TotalResults %>
+Total Pages: <%= items.TotalPages %>
+<% for (var i = 0; i < items.Item.length; i++) {
+	var b = items.Item[i];
+%>
+<div>
+	<img src="<%= b.LargeImage && b.LargeImage.URL %>" alt="">
+	<a href="<%= b.DetailPageURL %>"><%= b.ItemAttributes.Title %></a>
+</div>
+<% } %>
